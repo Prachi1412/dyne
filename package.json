@@ -1,0 +1,19 @@
+{
+  "name": "dyne",
+  "version": "1.0.0",
+  "description": "This is test application",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "author": "Mohd Amir",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "glob": "^7.1.2",
+    "md5": "^2.2.1",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.17.2"
+  }
+}
