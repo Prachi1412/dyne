@@ -12,16 +12,16 @@ exports.login = function(req, res) {
 	var checkBlank = commfunc.checkBlank(manValues);
 	if (checkBlank == 1) {
 		responses.parameterMissing(res);
-	} else {console.log("hh");
+	} else {
 		UserModal.checkLoginEmail(email, function(result){
 			if (result == 1) {
 				responses.sendError(res);
 			} else if ( result == 2 ) {
-				console.log("emailNotFound");
+				responses.nodata(res);
 			} else {
 				var encry_hash = md5(password);
 				if (result[0].password != encry_hash) {
-					console.log("Invalid password");
+					responses.invalidPassword(res);
 				} else {
 
 					var access_token = md5(new Date());
@@ -62,15 +62,9 @@ exports.create = function(req, res) {
                 responses.emailAlreadyExist(res);
             } else {
                 var user_id = md5(commfunc.generateRandomString());
-                console.log(user_id);
                 var access_token = md5(new Date());
-
-                console.log(req.files.length);
-                console.log(req.files);
                 var profile_image =req.files[0].filename;
-                console.log(profile_image);
                 var data = [user_id, access_token, name, email, md5(password), device_type, device_token, latitude, longitude,profile_image];
-                console.log(data);
                 UserModal.createUserData(data, function(err, result) {
                     if (result == 0) {
                         responses.sendError(res);

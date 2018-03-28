@@ -41,17 +41,18 @@ exports.nodata = function(res) {
 	res.status(constants.responseFlags.NO_DATA_FOUND).json(response);
 
 }
-// exports.success=function(result,res){
-// 	var response={
-// 		status:1,
-// 		message:result[0]
-// 	}
-// 	res.send(response);
-// }
 exports.invalidaccesstoken = function(res) {
 	var response = {
 		response: {},
 		message: constants.responseMessages.INVALID_ACCESS_TOKEN
 	};
 	res.status(constants.responseFlags.INVALID_ACCESS_TOKEN).json(response);
+}
+
+exports.invalidPassword = function(res) {
+	var response = {
+		response: {},
+		message: constants.responseMessages.INCORRECT_PASSWORD
+	};
+	res.status(constants.responseFlags.WRONG_PASSWORD).json(response);
 }
