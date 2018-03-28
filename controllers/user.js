@@ -46,9 +46,9 @@ exports.login = function(req, res) {
 		});
 	}
 }
-
+/* Controller for user Signup */ 
 exports.create = function(req, res) {
-    var {name,email,password,device_type,device_token,latitude,longitude} = req.body;
+    var {name,email,password,device_type,device_token,latitude,longitude,profile_image} = req.body;
     var manValues = [name, email, password, device_type, device_token, latitude, longitude];
 
     var checkBlank = commfunc.checkBlank(manValues);
@@ -62,8 +62,15 @@ exports.create = function(req, res) {
                 responses.emailAlreadyExist(res);
             } else {
                 var user_id = md5(commfunc.generateRandomString());
+                console.log(user_id);
                 var access_token = md5(new Date());
-                var data = [user_id, access_token, name, email, md5(password), device_type, device_token, latitude, longitude];
+
+                console.log(req.files.length);
+                console.log(req.files);
+                var profile_image =req.files[0].filename;
+                console.log(profile_image);
+                var data = [user_id, access_token, name, email, md5(password), device_type, device_token, latitude, longitude,profile_image];
+                console.log(data);
                 UserModal.createUserData(data, function(err, result) {
                     if (result == 0) {
                         responses.sendError(res);

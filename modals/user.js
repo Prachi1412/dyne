@@ -30,7 +30,7 @@ exports.updateUserData = function(data, condition, callback) {
 	});
 }
 exports.createUserData = function(data, callback){
-	var createsql = "INSERT INTO `registration` (user_id,access_token,name,email, password, device_type, device_token, latitude, longitude) values (?)";
+	var createsql = "INSERT INTO `registration` (user_id,access_token,name,email, password, device_type, device_token, latitude, longitude,profile_image) values (?)";
 	connection.query(createsql,[data],function(err,result){
 		if(err){
 		console.log("failed");
