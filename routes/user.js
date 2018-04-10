@@ -22,6 +22,10 @@ app.route('/user/login').post(user.login);
 
 
 app.route('/user/create').post(upload.any(),user.create);
+app.route('/user/forgetpassword').post(user.forgetpassword);
+app.route('/user/passwordUpdate').post(user.passwordUpdate);
+app.route('/user/search_nearby_place/:long/:lat').get(user.search_nearby_place);
+//app.route('/user/place_details/:place_id/:access_token').get(user.place_details);
 
 	return app;
 }

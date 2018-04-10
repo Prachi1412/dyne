@@ -56,3 +56,10 @@ exports.invalidPassword = function(res) {
 	};
 	res.status(constants.responseFlags.WRONG_PASSWORD).json(response);
 }
+exports.passwordUpdated = function(res){
+	var response = {
+		response: {},
+		message: constants.responseMessages.PASSWORD_CHANGED_SUCCESSFULLY
+	};
+	res.status(constants.responseFlags.PASSWORD_CHANGED_SUCCESSFULLY).json(response);
+}

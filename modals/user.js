@@ -22,11 +22,17 @@ exports.checkSignEmail = function (email, callback) {
 		}
 	});
 }
-exports.updateUserData = function(data, condition, callback) {
+exports.updateUserData = function(data, condition, callback) { 
+	
 	var sql = "UPDATE `registration` SET ? WHERE ?";
-	connection.query(sql, [data, condition], function(err, result){
-		console.log(err);
-		err ? callback(0) : callback(1);
+	
+	connection.query(sql,[data,condition], function(err, result){
+		// err ? callback(0) : callback(1);
+		if(err){ 
+			callback(0);
+		} else{ 
+			callback(1);
+		}
 	});
 }
 exports.createUserData = function(data, callback){
@@ -51,4 +57,27 @@ exports.selectUserData = function(user_id ,callback){
 			callback(result);
 		}
 	})
+}
+exports.checkotp = function (otp, callback) {
+	var sql = "SELECT * FROM `registration` WHERE `otp`=?";
+	connection.query(sql, [otp], function(err, result){ 
+		if (err) {
+			callback(1);
+
+		} else {
+			result.length > 0 ? callback(result) : callback(2);
+			// if ( result.length > 0 ) { callback(result); } else { callback(2); }
+		}
+	});
+}
+exports.updatePasswordData = function(password,email,otp, callback) { 
+	var sql = "UPDATE `registration` SET `password`=? WHERE `email`=? AND `otp`=?";
+	connection.query(sql,[password,email,otp], function(err, result){
+		// err ? callback(0) : callback(1);
+		if(err){ 
+			callback(0);
+		} else{ 
+			callback(1);
+		}
+	});
 }
